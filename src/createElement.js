@@ -18,11 +18,13 @@ const createElement = function (type, props, ...children) {
     }
   }
 
-  if (children.length === 1) {
-    props.children = children[0]
-  } else {
-    props.children = children
-  }
+  // if (children.length === 1) {
+  //   props.children = children[0]
+  // } else {
+  //   props.children = children
+  // }
+
+  props.children = children
 
   return new VDom(type, key, props)
 }

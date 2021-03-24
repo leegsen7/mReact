@@ -11,7 +11,9 @@ class ReactTextComponent extends ReactBaseComponent {
     super(vDom)
   }
   // 渲染
-  mountComponent() {}
+  mountComponent() {
+    return this._vDom
+  }
 
   // 更新
   updateComponent() {}
@@ -36,11 +38,17 @@ class ReactDomComponent extends ReactBaseComponent {
     } = this._vDom
     let propsStr = ''
     let content = ''
-    for (const propKey of props) {
+    for (const propKey in props) {
       if (props[propKey] && propKey !== 'children' && !/^on[A-Za-z]/.test(propKey)) {
         propsStr += ` ${this.handlePropsValue(propKey, props[propKey])}`
       }
     }
+    children.forEach((item) => {
+      const childComponent = instantiateReactComponent(item)
+      // 得到子节点的渲染内容
+      const childMarkup = childComponent.mountComponent()
+      content += childMarkup
+    })
     return `<${type}${propsStr}>${content}</${type}>`
   }
 
