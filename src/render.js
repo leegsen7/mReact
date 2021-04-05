@@ -61,7 +61,21 @@ class ReactCompositeComponent extends ReactBaseComponent {
     super(vDom)
   }
   // 渲染
-  mountComponent() {}
+  mountComponent() {
+    const {
+      type,
+      props,
+      props: { children },
+    } = this._vDom
+    // class组件
+    if (type.prototype && type.prototype.isReactComponent) {
+      const instance = new type(props)
+      const vDom = instance.render()
+      return instantiateReactComponent(vDom).mountComponent()
+    }
+    // 函数式组件
+    return instantiateReactComponent(type(props)).mountComponent()
+  }
 
   // 更新
   updateComponent() {}

@@ -8,4 +8,6 @@ class Component {
   }
 }
 
+Component.prototype.isReactComponent = {}
+
 export default Component

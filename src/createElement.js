@@ -3,7 +3,7 @@ class VDom {
   constructor(type, key, props) {
     this.type = type
     this.key = key
-    this.props = props
+    this.props = props || null
   }
 }
 
@@ -13,7 +13,7 @@ const createElement = function (type, props, ...children) {
   const { key = null } = props
 
   for (let propName in props) {
-    if (propName !== 'key' && config.hasOwnProperty(propName)) {
+    if (propName !== 'key' && props.hasOwnProperty(propName)) {
       newProps[propName] = props[propName]
     }
   }
