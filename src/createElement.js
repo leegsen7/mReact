@@ -1,9 +1,11 @@
+let nextReactRootIndex = 1
 
 class VDom {
   constructor(type, key, props) {
     this.type = type
     this.key = key
     this.props = props || null
+    this._rootId = nextReactRootIndex++
   }
 }
 
